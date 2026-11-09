@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Kittu ❤️</title>
+    
+    <!-- Yahan se Password Protection shuru hai -->
+    <script>
+        var password = prompt("Yeh site private hai. Kittu, apna birthday password dalein:");
+        if (password !== "Kittu123") { // <-- Yahan apna manpasand password badal sakte hain
+            alert("Galat password! Aap yeh site nahi dekh sakte.");
+            window.location.href = "https://google.com"; 
+        }
+    </script>
+    <!-- Password Protection khatam -->
+
+    <style>
+        :root {
+            --pink: #ff4d6d;
+            --red: #c9184a;
+            --dark-red: #800f2f;
+            --light-pink: #fff0f3;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; }
+        body { background-color: var(--light-pink); color: var(--dark-red); overflow-x: hidden; text-align: center; }
+        .screen { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; transition: all 0.5s ease; position: relative; }
+        h1 { font-size: 2.5rem; margin-bottom: 20px; color: var(--red); text-shadow: 2px 2px 4px rgba(0,0,0,0.1); }
+        p { font-size: 1.1rem; margin-bottom: 20px; max-width: 600px; line-height: 1.6; }
+        .btn { background: linear-gradient(45deg, var(--pink), var(--red)); color: white; border: none; padding: 15px 35px; font-size: 1.2rem; font-weight: bold; border-radius: 50px; cursor: pointer; box-shadow: 0 5px 15px rgba(201, 24, 74, 0.4); transition: transform 0.2s; margin-top: 20px; }
+        .btn:hover { transform: scale(1.05); }
+        
+        /* Balloon Game */
+        .balloon-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; max-width: 600px; margin-top: 30px; }
+        .balloon { width: 80px; height: 100px; border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%; cursor: pointer; position: relative; animation: float 3s ease-in-out infinite alternate; display: flex; align-items: center; justify-content: center; font-size: 2rem; box-shadow: inset -10px -10px 20px rgba(0,0,0,0.1); }
+        .balloon::after { content: ""; position: absolute; bottom: -8px; left: 36px; border-left: 4px solid transparent; border-right: 4px solid transparent; border-bottom: 8px solid currentColor; }
+        .balloon-txt { display: none; font-size: 1.1rem; font-weight: bold; color: var(--red); background: white; padding: 15px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); margin-top: 20px; animation: fadeIn 0.5s; width: 90%; max-width: 400px; }
+        
+        /* Gallery */
+        .gallery-container { width: 100%; max-width: 500px; margin-top: 20px; }
+        .photo-slot { background: white; padding: 15px; border-radius: 15px; box-shadow: 0 10px 20px rgba(0,0,0,0.05); margin-bottom: 30px; border: 2px dashed var(--pink); position: relative; }
+        .photo-slot img { width: 100%; max-width: 100%; height: 300px; object-fit: cover; border-radius: 10px; display: none; }
+        .upload-btn { background: var(--light-pink); border: 2px solid var(--pink); color: var(--red); padding: 40px 20px; border-radius: 10px; cursor: pointer; display: block; font-weight: bold; }
+        .caption { font-size: 1.2rem; font-weight: bold; margin-top: 10px; color: var(--red); }
+        .date { font-size: 0.9rem; color: #777; }
+
+        @keyframes float { 0% { transform: translateY(0px) rotate(-2deg); } 100% { transform: translateY(-15px) rotate(2deg); } }
+        @keyframes fadeIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
+        .hidden { display: none !important; }
+    </style>
+</head>
+<body>
+
+    <!-- SCREEN 1: Welcome -->
+    <div id="screen1" class="screen">
+        <h1>Happy Birthday Kritika! 🎂</h1>
+        <p>Hey Kittu, tumhare is special day ko aur special banane ke liye maine ek choti si cheez banayi hai. Kya tum ready ho dekhne ke liye?</p>
+        <button class="btn" onclick="nextScreen(2)">Haan, Chalo Dekhte Hain! ✨</button>
+    </div>
+
+    <!-- SCREEN 2: Balloon Pop Game -->
+    <div id="screen2" class="screen hidden">
+        <h1>Pop the Balloons! 🎈</h1>
+        <p>Kittu, in balloons par ek-ek karke click karo, tumhare liye secret wishes chupi hain!</p>
+        <div class="balloon-container">
+            <div class="balloon" style="background-color: #ff4d6d; color: #ff4d6d;" onclick="popBalloon(0, 'Tum meri life ki sabse pyaari blessings ho! Happy Birthday my love! ❤️')">🎈</div>
+            <div class="balloon" style="background-color: #ff758f; color: #ff758f; animation-delay: 0.5s;" onclick="popBalloon(1, 'Waise toh tum bohot gussa karti ho, par gusse me aur bhi cute lagti ho! 😘')">🎈</div>
+            <div class="balloon" style="background-color: #c9184a; color: #c9184a; animation-delay: 1s;" onclick="popBalloon(2, 'I promise, main hamesha tumhare sath rahunga, har khushi aur har nakhre me! 💖')">🎈</div>
+            <div class="balloon" style="background-color: #ff85a1; color: #ff85a1; animation-delay: 1.5s;" onclick="popBalloon(3, 'Meri life me aane ke liye thank you Kittu. You are my absolute favorite! 🎀')">🎈</div>
+        </div>
+        <div id="wishText" class="balloon-txt"></div>
+        <button class="btn hidden" id="nextToGallery" onclick="nextScreen(3)">Ab Aage Chalo ➡️</button>
+    </div>
+
+    <!-- SCREEN 3: Photo Gallery -->
+    <div id="screen3" class="screen hidden">
+        <h1>Our Beautiful Timeline 📸</h1>
+        <p>Yahan apni pyari pics add karo jo tumhare dil ke sabse paas hain:</p>
+        
+        <div class="gallery-container">
+            <!-- Slot 1 -->
+            <div class="photo-slot">
+                <input type="file" accept="image/*" id="file1" class="hidden" onchange="previewImage(this, 'img1', 'label1')">
+                <label for="file1" class="upload-btn" id="label1">Click here to Upload Photo</label>
+                <img id="img1" src="" alt="First Selfie">
+                <div class="caption">Our First Selfie</div>
+                <div class="date">3 Feb 2022</div>
+            </div>
+
+            <!-- Slot 2 -->
+            <div class="photo-slot">
+                <input type="file" accept="image/*" id="file2" class="hidden" onchange="previewImage(this, 'img2', 'label2')">
+                <label for="file2" class="upload-btn" id="label2">Click here to Upload Photo</label>
+                <img id="img2" src="" alt="Close Moment 1">
+                <div class="caption">Close Moments</div>
+                <div class="date">Sweet Memories</div>
+            </div>
+        </div>
+
+        <button class="btn" onclick="nextScreen(4)">Ek Aakhri Cheez 📝</button>
+    </div>
+
+    <!-- SCREEN 4: Final Love Letter -->
+    <div id="screen4" class="screen hidden">
+        <h1>Forever Yours ❤️</h1>
+        <p style="font-style: italic; font-size: 1.3rem;">"Tumse hi shuru, tum par hi khatam... meri mohabbat ka safar ho tum!"</p>
+        <p>Happy Birthday once again Kittu! Ye saal tumhari life me dher saari khushiyan lekar aaye. Hamesha haste muskuraate rehna kyuki tumhari muskurahat hi meri sabse badi khushi hai!</p>
+        <div style="font-size: 3rem; margin-top: 20px;">🎉💖🎂</div>
+    </div>
+
+    <script>
+        let poppedCount = 0;
+
+        function nextScreen(screenNum) {
+            document.querySelectorAll('.screen').forEach(s => s.classList.add('hidden'));
+            document.getElementById('screen' + screenNum).classList.remove('hidden');
+            window.scrollTo(0, 0);
+        }
+
+        function popBalloon(index, text) {
+            const balloons = document.querySelectorAll('.balloon');
+            if (!balloons[index].classList.contains('popped')) {
+                balloons[index].style.visibility = 'hidden';
+                balloons[index].classList.add('popped');
+                
+                const wishText = document.getElementById('wishText');
+                wishText.innerText = text;
+                wishText.style.display = 'block';
+                
+                poppedCount++;
+                if (poppedCount >= 4) {
+                    document.getElementById('nextToGallery').classList.remove('hidden');
+                }
+            }
+        }
+
+        function previewImage(input, imgId, labelId) {
+            const file = input.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const img = document.getElementById(imgId);
+                    img.src = e.target.result;
+                    img.style.display = 'block';
+                    document.getElementById(labelId).style.display = 'none';
+                }
+                reader.readAsDataURL(file);
+            }
+        }
+    </script>
+</body>
+</html>
